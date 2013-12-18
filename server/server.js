@@ -16,29 +16,98 @@ app.configure(function() {
   app.use( express.errorHandler({ dumpExceptions: true, showStack: true}) );
 });
 
-function buildBody(action) {
-   return '<?xml version="1.0" encoding="utf-8"?><s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" s:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><s:Body><u:X_SendKey xmlns:u="urn:panasonic-com:service:p00NetworkControl:1"><X_KeyEvent>' + action + '</X_KeyEvent></u:X_SendKey></s:Body></s:Envelope>';
-}
+var ipAddress = "";
+var self = this;
 
-app.post('/tv/action', function(req, res){
-  console.log(req.body.action);
+// Method for sending requests
+var sendRequest = function(url, urn, action, options) {
+   var body = "<?xml version='1.0' encoding='utf-8'?>\n"+
+   "<s:Envelope xmlns:s='http://schemas.xmlsoap.org/soap/envelope/' s:encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'>\n"+
+   " <s:Body>\n"+
+   "  <u:"+action+" xmlns:u='urn:"+urn+"'>\n"+
+   "   "+options['args']+"\n"+
+   "  </u:"+action+">\n"+
+   " </s:Body>\n"+
+   "</s:Envelope>\n";
 
-  var body = buildBody(req.body.action);
-
-  var postRequest = {
-      host: "10.127.1.102",
-      path: "/nrc/control_0",
-      port: 55000,
-      method: "POST",
-      headers: {
-          'SOAPACTION': '"urn:panasonic-com:service:p00NetworkControl:1#X_SendKey"',
-          'Content-Type': 'text/xml'
-      }
+   var postRequest = {
+    host: "10.127.1.102",
+    path: url,
+    port: 55000,
+    method: "POST",
+    headers: {
+      'Content-Length': body.length,
+      'Content-Type': 'text/xml; charset="utf-8"',
+      'SOAPACTION': '"urn:'+urn+'#'+action+'"'
+    }
   };
 
-  var req = http.request(postRequest);
+  var self = this;
+  if(options.hasOwnProperty('callback')) {
+    self.callback = options['callback'];
+  } else {
+    self.callback = function(data){ console.log(data) };
+  }
+
+  var req = http.request(postRequest, function(res) {
+    res.setEncoding('utf8');
+    res.on('data', self.callback);
+  });
+
+  req.on('error', function(e) {
+    console.log('error: ' + e.message);
+    console.log(e);
+  });
+
   req.write(body);
   req.end();
+}
+
+app.post('/tv/setip', function(req,res) {
+  self.ipAddress = req.body.ip;
+});
+
+app.post('/tv/action', function(req, res) {
+  sendRequest(
+    '/nrc/control_0',
+    'panasonic-com:service:p00NetworkControl:1',
+    'X_SendKey',
+    {
+      args: "<X_KeyEvent>"+req.body.action+"</X_KeyEvent>"
+    }
+  );
+  res.end();
+});
+
+app.get('/tv/volume', function(req, res) {
+  var self = this;
+  sendRequest(
+    '/dmr/control_0',
+    'schemas-upnp-org:service:RenderingControl:1',
+    'GetVolume',
+    {
+      args: "<InstanceID>0</InstanceID><Channel>Master</Channel>",
+      callback: function(data){
+        var regex = /<CurrentVolume>(\d*)<\/CurrentVolume>/gm;
+        var match = regex.exec(data);
+        if(match !== null){
+          var volume = match[1];
+          res.send(volume);
+        }
+      }
+    }
+  );
+});
+
+app.get('/tv/volume/:vol', function(req, res) {
+  sendRequest(
+    '/dmr/control_0',
+    'schemas-upnp-org:service:RenderingControl:1',
+    'SetVolume',
+    {
+      args: "<InstanceID>0</InstanceID><Channel>Master</Channel><DesiredVolume>"+req.params.vol+"</DesiredVolume>"
+    }
+  );
   res.end();
 });
 
