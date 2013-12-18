@@ -91,31 +91,15 @@
           <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
       <![endif]-->
 
-      <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-      <script>
-          var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-          (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-          g.src='//www.google-analytics.com/ga.js';
-          s.parentNode.insertBefore(g,s)}(document,'script'));
-      </script>
-
-      <!-- build:js scripts/main.js -->
+      <!-- build:js scripts/vendor.js -->
       <script src="bower_components/jquery/jquery.js"></script>
-      <script src="scripts/main.js"></script>
+      <script src="scripts/vendor/async.localStorage.js"></script>
+      <script src="scripts/vendor/fastclick.js"></script>
       <!-- endbuild -->
 
-      <!-- build:js(.tmp) scripts/coffee.js -->
+      <!-- build:js(.tmp) scripts/app.js -->
       <script src="scripts/app.js"></script>
       <!-- endbuild -->
 
-      <!-- build:js scripts/async-local-storage.js -->
-      <script src="scripts/async.localStorage.js"></script>
-      <script src="scripts/async.localStorage.examples.js"></script>
-      <!-- endbuild -->
-
-      <!-- build:js scripts/fastclick.js -->
-      <script src="scripts/fastclick.js"></script>
-      <script src="scripts/fastclick.example.js"></script>
-      <!-- endbuild -->
 </body>
 </html>
