@@ -111,6 +111,23 @@ app.get('/tv/volume/:vol', function(req, res) {
   res.end();
 });
 
+app.get('/tv/volume/mute/:opt', function(req, res) {
+  if (req.params.opt == 1 || req.params.opt == "true")
+    data = 1;
+  else
+    data = 0;
+
+  sendRequest(
+    '/dmr/control_0',
+    'schemas-upnp-org:service:RenderingControl:1',
+    'SetMute',
+    {
+      args: "<InstanceID>0</InstanceID><Channel>Master</Channel><DesiredMute>"+data+"</DesiredMute>"
+    }
+  );
+  res.end();
+})
+
 // Run server
 app.listen(3000);
 console.log('Listening on port 3000');
