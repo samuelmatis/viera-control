@@ -9,174 +9,113 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <link rel="stylesheet" href="styles/main.css">
-        <!-- build:js scripts/vendor/modernizr.js -->
-        <script src="bower_components/modernizr/modernizr.js"></script>
-        <!-- endbuild -->
 
-        <!-- build:css styles/vendor/bootstrap.css -->
+        <script src="bower_components/modernizr/modernizr.js"></script>
+
         <link rel="stylesheet" href="styles/vendor/bootstrap/bootstrap.css">
-        <!-- endbuild -->
+        <link rel="stylesheet" href="styles/main.css">
 </head>
     <body>
 
-    <!-- Page content of course! -->
-    <!-- Custom styles for this template -->
-<style>
-  /* Move down content because we have a fixed navbar that is 50px tall */
-  body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-  }
+      <div class="container">
+        <div class="row-big">
+          <button class="btn btn-block" data-action="NRC_POWER_ONOFF"><i class="icon-off"></i> Vypnut TV</button>
+        </div>
+        <div class="row">
+          <button class="btn grid3" data-action="NRC_TV-ONOFF">TV</button>
+          <button class="btn grid3" data-action="NRC_CHG_INPUT-ONOFF">AV</button>
+          <button class="btn grid3" data-action="NRC_3D-ONOFF">3D</button>
+        </div>
+        <div class="row-big">
+          <button class="btn grid4" data-action="NRC_MENU-ONOFF">MENU</button>
+          <button class="btn grid4" data-action="NRC_TEXT-ONOFF">TEXT</button>
+          <button class="btn grid4" data-action="NRC_STTL-ONOFF">STTL</button>
+          <button class="btn grid4" data-action="NRC_DISP_MODE-ONOFF">ASPECT</button>
+        </div>
 
-  /* Set widths on the navbar form inputs since otherwise they're 100% wide */
-  .navbar-form input[type="text"],
-  .navbar-form input[type="password"] {
-    width: 180px;
-  }
+        <div class="row-big">
+          <div class="grid1" style="margin-left:25px;">
+            <button class="btn" data-action="NRC_VOLUP-ONOFF"><i class="icon-plus"></i></button>
+            <br><br><br>
+            <button class="btn" data-action="NRC_VOLDOWN-ONOFF"><i class="icon-minus"></i></button>
+          </div>
 
-  /* Wrapping element */
-  /* Set some basic padding to keep content from hitting the edges */
-  .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
+          <div id="arrows">
+            <button class="btn arr" data-action="NRC_UP-ONOFF"><i class="icon-arrow-up"></i></button>
+            <br>
+            <button class="btn" data-action="NRC_LEFT-ONOFF"><i class="icon-arrow-left"></i></button>
+            <button class="btn" data-action="NRC_ENTER-ONOFF">OK</button>
+            <button class="btn" data-action="NRC_RIGHT-ONOFF"><i class="icon-arrow-right"></i></button>
+            <br>
+            <button class="btn arr" data-action="NRC_DOWN-ONOFF"><i class="icon-arrow-down"></i></button>
+          </div>
 
-  /* Responsive: Portrait tablets and up */
-  @media screen and (min-width: 768px) {
-    /* Let the jumbotron breathe */
-    .jumbotron {
-      margin-top: 20px;
-    }
-    /* Remove padding from wrapping element since we kick in the grid classes here */
-    .body-content {
-      padding: 0;
-    }
-  }
-</style>
+          <div class="grid1">
+            <button class="btn" data-action="NRC_CH_UP-ONOFF"><i class="icon-chevron-up"></i></button>
+            <br><br><br>
+            <button class="btn" data-action="NRC_CH_DOWN-ONOFF"><i class="icon-chevron-down"></i></button>
+          </div>
+        </div>
+        
+        <div class="row">
+        <button class="btn grid2" data-action="NRC_RETURN-ONOFF" style="margin-right:12px;"><i class=" icon-backward"></i> Spat</button>
+        <button class="btn grid2" data-action="NRC_MUTE-ONOFF"><i class="icon-volume-off"></i></button>
+        </div>
 
-<div class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <a class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </a>
-    <a class="navbar-brand" href="#">Project name</a>
-    <div class="nav-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li class="nav-header">Nav header</li>
-            <li><a href="#">Separated link</a></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-      <form class="navbar-form form-inline pull-right">
-        <input type="text" placeholder="Email">
-        <input type="password" placeholder="Password">
-        <button type="submit" class="btn">Sign in</button>
-      </form>
-    </div><!--/.nav-collapse -->
-  </div>
-</div>
+        <div class="row-big">
+          <button class="btn btn-danger grid4" data-action="NRC_RED-ONOFF"></button>
+          <button class="btn btn-success grid4" data-action="NRC_GREEN-ONOFF"></button>
+          <button class="btn btn-warning grid4" data-action="NRC_YELLOW-ONOFF"></button>
+          <button class="btn btn-primary grid4" data-action="NRC_RED-ONOFF"></button>
+        </div>
 
-<div class="container">
-
-  <!-- Main jumbotron for a primary marketing message or call to action -->
-  <div class="jumbotron">
-                    <h1 class=''>'Allo, 'Allo!</h1>
-                <p>You now have</p>
-                <ul>
-                    <li>HTML5 Boilerplate</li>
-                    <li>Twitter Bootstrap 3</li>
-                    <li>Async localStorage Polyfill</li>
-                    <li>FastClick</li>
-                </ul>
-                <p>installed.</p>
-                <h3>Enjoy coding! - Yeoman</h3>
-
-    <p><button id="fullscreenTest" class="btn btn-primary btn-large">Go Fullscreen</button>
-    </p><p><span id="status"></span></p>
-  </div>
-
-  <div class="body-content">
-
-    <!-- Example row of columns -->
-    <div class="row">
-      <div class="col col-lg-4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
+        <div class="nums">
+          <button class="btn num" data-action="NRC_3D-ONOFF">1</button>
+          <button class="btn num" data-action="NRC_3D-ONOFF">2</button>
+          <button class="btn num" data-action="NRC_3D-ONOFF">3</button>
+        </div>
+        <div class="nums">
+          <button class="btn num" data-action="NRC_3D-ONOFF">4</button>
+          <button class="btn num" data-action="NRC_3D-ONOFF">5</button>
+          <button class="btn num" data-action="NRC_3D-ONOFF">6</button>
+        </div>
+        <div class="nums">
+          <button class="btn num" data-action="NRC_3D-ONOFF">7</button>
+          <button class="btn num" data-action="NRC_3D-ONOFF">8</button>
+          <button class="btn num" data-action="NRC_3D-ONOFF">9</button>
+        </div>
       </div>
-      <div class="col col-lg-4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
-     </div>
-      <div class="col col-lg-4">
-        <h2>Heading</h2>
-        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
-      </div>
-    </div>
-
-    <hr>
-
-    <footer>
-      <p>&copy; Company 2013</p>
-    </footer>
-  </div>
-
-</div> <!-- /container -->
 
 
-    <!-- JS and analytics only. -->
-    <!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
+      <!--[if lt IE 7]>
+          <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+      <![endif]-->
 
+      <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+      <script>
+          var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+          (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+          g.src='//www.google-analytics.com/ga.js';
+          s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
 
+      <!-- build:js scripts/main.js -->
+      <script src="bower_components/jquery/jquery.js"></script>
+      <script src="scripts/main.js"></script>
+      <!-- endbuild -->
 
-        <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-        <![endif]-->
+      <!-- build:js(.tmp) scripts/coffee.js -->
+      <script src="scripts/app.js"></script>
+      <!-- endbuild -->
 
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src='//www.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
-        </script>
+      <!-- build:js scripts/async-local-storage.js -->
+      <script src="scripts/async.localStorage.js"></script>
+      <script src="scripts/async.localStorage.examples.js"></script>
+      <!-- endbuild -->
 
-        <!-- build:js scripts/main.js -->
-        <script src="bower_components/jquery/jquery.js"></script>
-        <script src="scripts/main.js"></script>
-        <!-- endbuild -->
-
-        <!-- build:js(.tmp) scripts/coffee.js -->
-        <script src="scripts/hello.js"></script>
-        <!-- endbuild -->
-
-        <!-- build:js scripts/async-local-storage.js -->
-        <script src="scripts/async.localStorage.js"></script>
-        <script src="scripts/async.localStorage.examples.js"></script>
-        <!-- endbuild -->
-
-        <!-- build:js scripts/fastclick.js -->
-        <script src="scripts/fastclick.js"></script>
-        <script src="scripts/fastclick.example.js"></script>
-        <!-- endbuild -->
+      <!-- build:js scripts/fastclick.js -->
+      <script src="scripts/fastclick.js"></script>
+      <script src="scripts/fastclick.example.js"></script>
+      <!-- endbuild -->
 </body>
 </html>
