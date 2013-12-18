@@ -1,4 +1,6 @@
+FastClick.attach document.body
 $(".btn").each ->
   $(this).on "click", ->
-    console.log $(this).data("action")
-    $.post "/tv/action", $(this).data("action")
+    console.log "data", $(this).data("action")
+    $.post "/tv/action",
+      action: $(this).data("action")
