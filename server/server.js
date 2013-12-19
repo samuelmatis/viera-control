@@ -114,6 +114,8 @@ app.get('/tv/volume/:vol', function(req, res) {
 app.get('/tv/volume/mute/:opt', function(req, res) {
   if (req.params.opt == 1 || req.params.opt == "true")
     data = 1;
+  else if (req.params.opt == 0 || req.params.opt == "false")
+    data = 0;
   else
     data = 0;
 
