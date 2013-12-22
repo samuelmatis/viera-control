@@ -5,3 +5,5 @@ dist
 app/bower_components
 .DS_Store
 app/scripts/*.js
+*.sublime-project
+*.sublime-workspace
