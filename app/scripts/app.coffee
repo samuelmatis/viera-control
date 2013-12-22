@@ -8,6 +8,12 @@ $(".btn").each ->
     $.post "/tv/action",
       action: $(this).data("action")
 
+# render current volume every one second
+setInterval ->
+  $.get "tv/volume", (data) ->
+    $(".vol").text data
+, 1000
+
 # bind key actions
 action = (data) ->
   console.log data
@@ -15,10 +21,9 @@ action = (data) ->
     action: data
 
 Mousetrap.bind ["up", "down", "left", "right"], (e, combo) ->
-  combo = combo.toUpperCase()
-  action "NRC_"+combo+"-ONOFF"
+  action "NRC_" + combo.toUpperCase() + "-ONOFF"
 
-Mousetrap.bind ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"], (e, combo) -> action "NRC_D"+combo+"-ONOFF"
+Mousetrap.bind ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"], (e, combo) -> action "NRC_D" + combo + "-ONOFF"
 
 Mousetrap.bind
   "+": -> action "NRC_VOLUP-ONOFF"

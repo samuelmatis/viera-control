@@ -16,7 +16,7 @@ app.configure(function() {
   app.use( express.errorHandler({ dumpExceptions: true, showStack: true}) );
 });
 
-var ipAddress = "";
+var ipAddress = "10.127.1.102";
 var self = this;
 
 // Method for sending requests
@@ -31,7 +31,7 @@ var sendRequest = function(url, urn, action, options) {
    "</s:Envelope>\n";
 
    var postRequest = {
-    host: "10.127.1.102",
+    host: '10.127.1.102',
     path: url,
     port: 55000,
     method: "POST",
@@ -63,9 +63,10 @@ var sendRequest = function(url, urn, action, options) {
   req.end();
 }
 
-app.post('/tv/setip', function(req,res) {
-  self.ipAddress = req.body.ip;
-});
+// app.get('/tv/setip/:ip', function(req,res) {
+//   self.ipAddress = req.params.ip;
+//   res.send(self.ipAddress);
+// });
 
 app.post('/tv/action', function(req, res) {
   sendRequest(
@@ -99,6 +100,30 @@ app.get('/tv/volume', function(req, res) {
   );
 });
 
+app.post("/tv/volume/plus", function(req, res) {
+  sendRequest(
+    '/nrc/control_0',
+    'panasonic-com:service:p00NetworkControl:1',
+    'X_SendKey',
+    {
+      args: "<X_KeyEvent>NRC_VOLUP-ONOFF</X_KeyEvent>"
+    }
+  );
+  res.end();
+});
+
+app.post("/tv/volume/minus", function(req, res) {
+  sendRequest(
+    '/nrc/control_0',
+    'panasonic-com:service:p00NetworkControl:1',
+    'X_SendKey',
+    {
+      args: "<X_KeyEvent>NRC_VOLDOWN-ONOFF</X_KeyEvent>"
+    }
+  );
+  res.end();
+});
+
 app.get('/tv/volume/:vol', function(req, res) {
   sendRequest(
     '/dmr/control_0',
@@ -111,24 +136,26 @@ app.get('/tv/volume/:vol', function(req, res) {
   res.end();
 });
 
-app.get('/tv/volume/mute/:opt', function(req, res) {
-  if (req.params.opt == 1 || req.params.opt == "true")
-    data = 1;
-  else if (req.params.opt == 0 || req.params.opt == "false")
-    data = 0;
-  else
-    data = 0;
+app.get('/tv/volume/mute/:opt?', function(req, res) {
+  var dat = 1;
+  if (req.params.opt == 1 || req.params.opt == "true") {
+    dat = 1;
+  } else if (req.params.opt == 0 || req.params.opt == "false") {
+    dat = 0;
+  }
 
-  sendRequest(
-    '/dmr/control_0',
-    'schemas-upnp-org:service:RenderingControl:1',
-    'SetMute',
-    {
-      args: "<InstanceID>0</InstanceID><Channel>Master</Channel><DesiredMute>"+data+"</DesiredMute>"
-    }
-  );
+  // sendRequest(
+  //   '/dmr/control_0',
+  //   'schemas-upnp-org:service:RenderingControl:1',
+  //   'SetMute',
+  //   {
+  //     args: "<InstanceID>0</InstanceID><Channel>Master</Channel><DesiredMute>"+data+"</DesiredMute>"
+  //   }
+  // );
+  // res.end();
+  console.log(dat);
   res.end();
-})
+});
 
 // Run server
 app.listen(3000);
