@@ -64,6 +64,8 @@
 </li>
 <li>The application is now running on url <a href="http://localhost:3000">localhost:3000</a>
 </li>
+<li>Set IP of your television (you can see it in TV settings) - <code>localhost:3000/tv/setip/&lt;your-ip&gt;</code>
+</li>
 </ol><hr><h3>
 <a name="ui-" class="anchor" href="#ui-"><span class="octicon octicon-link"></span></a>UI :</h3>
 
@@ -83,7 +85,7 @@
 <li>
 <p>via cURL - <em><code>curl &lt;url&gt;</code></em></p>
 
-<p>example: <code>curl localhost:3000/tv/home</code></p>
+<p>example: <code>curl localhost:3000/tv/volume/mute</code></p>
 </li>
 <li><p>via web browser - enter url <code>localhost:3000/&lt;url&gt;</code></p></li>
 </ul><h4>
@@ -340,6 +342,16 @@
 
     </div>
 
-    
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-45979901-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
   </body>
 </html>
