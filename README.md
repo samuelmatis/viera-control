@@ -11,7 +11,7 @@ Simple mobile optimized UI
 _ _ _ 
 ### API: ####
 
-All API calls expect `/tv/action` are GET
+All API calls except `/tv/action` are GET
 
 #### Using: ####
 
