@@ -4,16 +4,16 @@ var application_root = __dirname,
   path = require('path');
 
 // Create server
-var app = express();
+var vieraControl = express();
 
 // Configure server
-app.configure(function() {
-  app.use( express.bodyParser() );
-  app.use( express.methodOverride() );
-  app.use( app.router );
-  app.use( express.logger());
-  app.use( express.static( path.join( application_root, '../app' ) ) );
-  app.use( express.errorHandler({ dumpExceptions: true, showStack: true}) );
+vieraControl.configure(function() {
+  vieraControl.use( express.bodyParser() );
+  vieraControl.use( express.methodOverride() );
+  vieraControl.use( vieraControl.router );
+  vieraControl.use( express.logger());
+  vieraControl.use( express.static( path.join( application_root, '../app' ) ) );
+  vieraControl.use( express.errorHandler({ dumpExceptions: true, showStack: true}) );
 });
 
 var ipAddress = "10.127.1.102";
@@ -73,7 +73,7 @@ var sendRequest = function(type, action, command, options) {
   req.end();
 }
 
-app.get('/tv/setip/:ip', function(req,res) {
+vieraControl.get('/tv/setip/:ip', function(req,res) {
   if(/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/.test(req.params.ip)) {
     ipAddress = req.params.ip;
     res.send("ok")
@@ -82,15 +82,16 @@ app.get('/tv/setip/:ip', function(req,res) {
   }
 });
 
-app.post('/tv/action', function(req, res) {
+vieraControl.post('/tv/action', function(req, res) {
   sendRequest('command', 'X_SendKey', '<X_KeyEvent>'+req.body.action+'</X_KeyEvent>');
   res.end();
 });
 
 // Require the API
-require('./api')(app, sendRequest);
+// Comment this if you don't want to use API
+require('./api')(vieraControl, sendRequest);
 
 
 // Run server
-app.listen(3000);
+vieraControl.listen(3000);
 console.log('Listening on port 3000');
