@@ -7,6 +7,7 @@
 2. Install dependencies - `(sudo) npm install`
 3. Start the application - `node server/server.js`
 4. The application is now running on url [localhost:3000](http://localhost:3000)
+5. Set IP of your television (you can see it in TV settings) - `localhost:3000/tv/setip/<your-ip>`
 
 _ _ _ 
 ### UI : ###
@@ -24,7 +25,7 @@ All API calls except `/tv/action` are GET
 
 * via cURL - *`curl <url>`*
 
-    example: `curl localhost:3000/tv/home`
+    example: `curl localhost:3000/tv/volume/mute`
 
 
 * via web browser - enter url `localhost:3000/<url>`
