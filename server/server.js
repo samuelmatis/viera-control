@@ -87,6 +87,20 @@ vieraControl.post('/tv/action', function(req, res) {
   res.end();
 });
 
+vieraControl.get('/tv/volume', function(req, res) {
+  var self = this;
+  sendRequest('render', 'GetVolume', '<InstanceID>0</InstanceID><Channel>Master</Channel>',
+    {
+      callback: function(data){
+        var match = /<CurrentVolume>(\d*)<\/CurrentVolume>/gm.exec(data);
+        if(match !== null){
+          res.send(match[1]);
+        }
+      }
+    }
+  );
+});
+
 // Require the API
 // Comment this if you don't want to use API
 require('./api')(vieraControl, sendRequest);

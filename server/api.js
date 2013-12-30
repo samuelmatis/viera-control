@@ -98,20 +98,6 @@
     //-------------
     // Volume
     //-------------
-    vieraControl.get('/tv/volume', function(req, res) {
-      var self = this;
-      sendRequest('render', 'GetVolume', '<InstanceID>0</InstanceID><Channel>Master</Channel>',
-        {
-          callback: function(data){
-            var match = /<CurrentVolume>(\d*)<\/CurrentVolume>/gm.exec(data);
-            if(match !== null){
-              res.send(match[1]);
-            }
-          }
-        }
-      );
-    });
-
     vieraControl.get('/tv/volume/:vol', function(req, res) {
       sendRequest('render', 'SetVolume', '<InstanceID>0</InstanceID><Channel>Master</Channel><DesiredVolume>"+req.params.vol+"</DesiredVolume>');
       res.end();

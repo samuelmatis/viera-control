@@ -11,7 +11,7 @@ $(".btn").each ->
 # render current volume every one second
 setInterval ->
   $.get "tv/volume", (data) ->
-    $(".vol").text data
+    $(".vol").text "Volume - " + data
 , 1000
 
 # bind key actions
