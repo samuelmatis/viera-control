@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640" />
+
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>Viera-control by samuelmatis</title>
+  </head>
+
+  <body>
+    <a id="forkme_banner" href="https://github.com/samuelmatis/viera-control">View on GitHub</a>
+    <div class="shell">
+
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>Viera-control</h1>
+            <h2>Control your Panasonic Viera TV with simple REST API and mobile optimized UI</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
+
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/samuelmatis/viera-control/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/samuelmatis/viera-control/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
+
+
+      <span class="banner-fix"></span>
+
+
+      <section id="main_content">
+        <h1>
+<a name="viera-control" class="anchor" href="#viera-control"><span class="octicon octicon-link"></span></a>Viera control</h1>
+
+<blockquote>
+<p>Control your Panasonic Viera TV with simple REST API and mobile optimized UI</p>
+</blockquote>
+
+<h3>
+<a name="start-application" class="anchor" href="#start-application"><span class="octicon octicon-link"></span></a>Start application</h3>
+
+<ol>
+<li>You must have installed node.js on your computer.</li>
+<li>Install dependencies - <code>(sudo) npm install</code>
+</li>
+<li>Start the application - <code>node server/server.js</code>
+</li>
+<li>The application is now running on url <a href="http://localhost:3000">localhost:3000</a>
+</li>
+</ol><hr><h3>
+<a name="ui-" class="anchor" href="#ui-"><span class="octicon octicon-link"></span></a>UI :</h3>
+
+<p>Simple mobile optimized UI</p>
+
+<p><img src="http://app_screens.matiss.sk/viera.png" alt="ui"></p>
+
+<hr><h3>
+<a name="api" class="anchor" href="#api"><span class="octicon octicon-link"></span></a>API:</h3>
+
+<p>All API calls except <code>/tv/action</code> are GET</p>
+
+<h4>
+<a name="using" class="anchor" href="#using"><span class="octicon octicon-link"></span></a>Using:</h4>
+
+<ul>
+<li>
+<p>via cURL - <em><code>curl &lt;url&gt;</code></em></p>
+
+<p>example: <code>curl localhost:3000/tv/home</code></p>
+</li>
+<li><p>via web browser - enter url <code>localhost:3000/&lt;url&gt;</code></p></li>
+</ul><h4>
+<a name="send-codes-from-codestxt-directly-to-the-tv" class="anchor" href="#send-codes-from-codestxt-directly-to-the-tv"><span class="octicon octicon-link"></span></a>Send codes (from <a href="/codes.txt">codes.txt</a>) directly to the TV</h4>
+
+<table>
+<thead><tr>
+<th>URL</th>
+<th>METHOD</th>
+<th>BODY DATA</th>
+</tr></thead>
+<tbody><tr>
+<td><code>/tv/action</code></td>
+<td>POST</td>
+<td>
+<strong>action</strong> - code</td>
+</tr></tbody>
+</table><h4>
+<a name="basic-commands" class="anchor" href="#basic-commands"><span class="octicon octicon-link"></span></a>Basic commands:</h4>
+
+<table>
+<thead><tr>
+<th>URL</th>
+<th></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>/tv/power</code></td>
+<td>Turn off tv</td>
+</tr>
+<tr>
+<td><code>/tv/menu</code></td>
+<td>Show menu</td>
+</tr>
+<tr>
+<td><code>/tv/3d</code></td>
+<td>Show 3D settings</td>
+</tr>
+<tr>
+<td><code>/tv/ok</code></td>
+<td>OK button</td>
+</tr>
+<tr>
+<td><code>/tv/back</code></td>
+<td>Go back</td>
+</tr>
+<tr>
+<td><code>/tv/option</code></td>
+<td>Option button</td>
+</tr>
+<tr>
+<td><code>/tv/cancel</code></td>
+<td>Cancel button</td>
+</tr>
+<tr>
+<td><code>/tv/apps</code></td>
+<td>Show apps</td>
+</tr>
+<tr>
+<td><code>/tv/home</code></td>
+<td>Show homepage</td>
+</tr>
+<tr>
+<td><code>/tv/guide</code></td>
+<td>Show guide</td>
+</tr>
+</tbody>
+</table><h4>
+<a name="input" class="anchor" href="#input"><span class="octicon octicon-link"></span></a>Input:</h4>
+
+<table>
+<thead><tr>
+<th>URL</th>
+<th></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>/tv/input/tv</code></td>
+<td>Change TV input</td>
+</tr>
+<tr>
+<td><code>/tv/input/av</code></td>
+<td>Change AV input</td>
+</tr>
+</tbody>
+</table><h4>
+<a name="controls" class="anchor" href="#controls"><span class="octicon octicon-link"></span></a>Controls:</h4>
+
+<table>
+<thead><tr>
+<th>URL</th>
+<th></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>/tv/up</code></td>
+<td>Go up</td>
+</tr>
+<tr>
+<td><code>/tv/down</code></td>
+<td>Go down</td>
+</tr>
+<tr>
+<td><code>/tv/left</code></td>
+<td>Go left</td>
+</tr>
+<tr>
+<td><code>/tv/right</code></td>
+<td>Go right</td>
+</tr>
+</tbody>
+</table><h4>
+<a name="volume" class="anchor" href="#volume"><span class="octicon octicon-link"></span></a>Volume:</h4>
+
+<table>
+<thead><tr>
+<th>URL</th>
+<th></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>/tv/volume</code></td>
+<td>Get volume</td>
+</tr>
+<tr>
+<td><code>/tv/volume/&lt;volume&gt;</code></td>
+<td>Set volume</td>
+</tr>
+<tr>
+<td><code>/tv/volume/plus</code></td>
+<td>Volume +1</td>
+</tr>
+<tr>
+<td><code>/tv/volume/minus</code></td>
+<td>Volume -1</td>
+</tr>
+<tr>
+<td><code>/tv/volume/mute</code></td>
+<td>Mute</td>
+</tr>
+</tbody>
+</table><h4>
+<a name="channels" class="anchor" href="#channels"><span class="octicon octicon-link"></span></a>Channels:</h4>
+
+<table>
+<thead><tr>
+<th>URL</th>
+<th></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>/tv/channel/up</code></td>
+<td>Channel up</td>
+</tr>
+<tr>
+<td><code>/tv/channel/down</code></td>
+<td>Channel down</td>
+</tr>
+</tbody>
+</table><h4>
+<a name="player" class="anchor" href="#player"><span class="octicon octicon-link"></span></a>Player</h4>
+
+<table>
+<thead><tr>
+<th>URL</th>
+<th></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>/tv/player/rew</code></td>
+<td>Rewind</td>
+</tr>
+<tr>
+<td><code>/tv/player/play</code></td>
+<td>Play</td>
+</tr>
+<tr>
+<td><code>/tv/player/ff</code></td>
+<td>Fast forward</td>
+</tr>
+<tr>
+<td><code>/tv/player/prev</code></td>
+<td>Skip previous</td>
+</tr>
+<tr>
+<td><code>/tv/player/pause</code></td>
+<td>Pause</td>
+</tr>
+<tr>
+<td><code>/tv/player/next</code></td>
+<td>Next</td>
+</tr>
+<tr>
+<td><code>/tv/player/stop</code></td>
+<td>Stop</td>
+</tr>
+<tr>
+<td><code>/tv/player/rec</code></td>
+<td>Record</td>
+</tr>
+</tbody>
+</table><h4>
+<a name="numbers" class="anchor" href="#numbers"><span class="octicon octicon-link"></span></a>Numbers</h4>
+
+<table>
+<thead><tr>
+<th>URL</th>
+<th></th>
+</tr></thead>
+<tbody><tr>
+<td><code>/tv/vol/&lt;num&gt;</code></td>
+<td>Number from 1 to 9</td>
+</tr></tbody>
+</table><h4>
+<a name="color-buttons" class="anchor" href="#color-buttons"><span class="octicon octicon-link"></span></a>Color buttons</h4>
+
+<table>
+<thead><tr>
+<th>URL</th>
+<th></th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>/tv/red</code></td>
+<td>Red button</td>
+</tr>
+<tr>
+<td><code>/tv/green</code></td>
+<td>Green button</td>
+</tr>
+<tr>
+<td><code>/tv/yellow</code></td>
+<td>Yellow button</td>
+</tr>
+<tr>
+<td><code>/tv/blue</code></td>
+<td>Blue button</td>
+</tr>
+</tbody>
+</table>
+      </section>
+
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/samuelmatis">samuelmatis</a> can be found on <a href="https://github.com/samuelmatis/viera-control">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
+      </footer>
+
+    </div>
+
+    
+  </body>
+</html>
