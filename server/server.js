@@ -17,21 +17,31 @@ app.configure(function() {
 });
 
 var ipAddress = "10.127.1.102";
-var self = this;
 
 // Method for sending requests
-var sendRequest = function(url, urn, action, options) {
-   var body = "<?xml version='1.0' encoding='utf-8'?>\n"+
-   "<s:Envelope xmlns:s='http://schemas.xmlsoap.org/soap/envelope/' s:encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'>\n"+
-   " <s:Body>\n"+
-   "  <u:"+action+" xmlns:u='urn:"+urn+"'>\n"+
-   "   "+options['args']+"\n"+
-   "  </u:"+action+">\n"+
-   " </s:Body>\n"+
-   "</s:Envelope>\n";
+var sendRequest = function(type, action, command, options) {
+  var url, urn;
+  if(type == "command") {
+    url = "/nrc/control_0";
+    urn = "panasonic-com:service:p00NetworkControl:1";
+  } else if (type == "render") {
+    url = "/dmr/control_0";
+    urn = "schemas-upnp-org:service:RenderingControl:1";
+  }
+
+   var body = "<?xml version='1.0' encoding='utf-8'?> \
+   <s:Envelope xmlns:s='http://schemas.xmlsoap.org/soap/envelope/' s:encodingStyle='http://schemas.xmlsoap.org/soap/encoding/'> \
+    <s:Body> \
+     <u:"+action+" xmlns:u='urn:"+urn+"'> \
+      "+command+" \
+     </u:"+action+"> \
+    </s:Body> \
+   </s:Envelope>";
+
+   console.log(command + "\n");
 
    var postRequest = {
-    host: '10.127.1.102',
+    host: ipAddress,
     path: url,
     port: 55000,
     method: "POST",
@@ -43,7 +53,7 @@ var sendRequest = function(url, urn, action, options) {
   };
 
   var self = this;
-  if(options.hasOwnProperty('callback')) {
+  if(options !== undefined) {
     self.callback = options['callback'];
   } else {
     self.callback = function(data){ console.log(data) };
@@ -63,99 +73,23 @@ var sendRequest = function(url, urn, action, options) {
   req.end();
 }
 
-// app.get('/tv/setip/:ip', function(req,res) {
-//   self.ipAddress = req.params.ip;
-//   res.send(self.ipAddress);
-// });
+app.get('/tv/setip/:ip', function(req,res) {
+  if(/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/.test(req.params.ip)) {
+    ipAddress = req.params.ip;
+    res.send("ok")
+  } else {
+    res.send("invalid ip")
+  }
+});
 
 app.post('/tv/action', function(req, res) {
-  sendRequest(
-    '/nrc/control_0',
-    'panasonic-com:service:p00NetworkControl:1',
-    'X_SendKey',
-    {
-      args: "<X_KeyEvent>"+req.body.action+"</X_KeyEvent>"
-    }
-  );
+  sendRequest('command', 'X_SendKey', '<X_KeyEvent>'+req.body.action+'</X_KeyEvent>');
   res.end();
 });
 
-app.get('/tv/volume', function(req, res) {
-  var self = this;
-  sendRequest(
-    '/dmr/control_0',
-    'schemas-upnp-org:service:RenderingControl:1',
-    'GetVolume',
-    {
-      args: "<InstanceID>0</InstanceID><Channel>Master</Channel>",
-      callback: function(data){
-        var regex = /<CurrentVolume>(\d*)<\/CurrentVolume>/gm;
-        var match = regex.exec(data);
-        if(match !== null){
-          var volume = match[1];
-          res.send(volume);
-        }
-      }
-    }
-  );
-});
+// Require the API
+require('./api')(app, sendRequest);
 
-app.post("/tv/volume/plus", function(req, res) {
-  sendRequest(
-    '/nrc/control_0',
-    'panasonic-com:service:p00NetworkControl:1',
-    'X_SendKey',
-    {
-      args: "<X_KeyEvent>NRC_VOLUP-ONOFF</X_KeyEvent>"
-    }
-  );
-  res.end();
-});
-
-app.post("/tv/volume/minus", function(req, res) {
-  sendRequest(
-    '/nrc/control_0',
-    'panasonic-com:service:p00NetworkControl:1',
-    'X_SendKey',
-    {
-      args: "<X_KeyEvent>NRC_VOLDOWN-ONOFF</X_KeyEvent>"
-    }
-  );
-  res.end();
-});
-
-app.get('/tv/volume/:vol', function(req, res) {
-  sendRequest(
-    '/dmr/control_0',
-    'schemas-upnp-org:service:RenderingControl:1',
-    'SetVolume',
-    {
-      args: "<InstanceID>0</InstanceID><Channel>Master</Channel><DesiredVolume>"+req.params.vol+"</DesiredVolume>"
-    }
-  );
-  res.end();
-});
-
-app.get('/tv/volume/mute/:opt?', function(req, res) {
-  var dat = 1;
-  if (req.params.opt == 1 || req.params.opt == "true") {
-    dat = 1;
-  } else if (req.params.opt == 0 || req.params.opt == "false") {
-    dat = 0;
-  }
-
-  // sendRequest(
-  //   '/dmr/control_0',
-  //   'schemas-upnp-org:service:RenderingControl:1',
-  //   'SetMute',
-  //   {
-  //     args: "<InstanceID>0</InstanceID><Channel>Master</Channel><DesiredMute>"+data+"</DesiredMute>"
-  //   }
-  // );
-  // res.end();
-  console.log(dat);
-  res.end();
-});
 
 // Run server
 app.listen(3000);
