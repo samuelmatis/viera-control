@@ -2,9 +2,7 @@
   "name": "new",
   "version": "0.0.0",
   "dependencies": {
-    "bootstrap": "~2.3.2",
-    "modernizr": "~2.6.2",
-    "jquery": "~1.9.1"
+
   },
   "devDependencies": {}
 }
