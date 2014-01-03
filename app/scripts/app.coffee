@@ -5,6 +5,7 @@ FastClick.attach document.body
 $(".btn").each ->
   $(this).on "click", (e) ->
     e.preventDefault()
+    $(this).blur()
     $.post "/tv/action",
       action: $(this).data("action")
 
