@@ -99,7 +99,7 @@
     // Volume
     //-------------
     vieraControl.get('/tv/volume/:vol', function(req, res) {
-      sendRequest('render', 'SetVolume', '<InstanceID>0</InstanceID><Channel>Master</Channel><DesiredVolume>"+req.params.vol+"</DesiredVolume>');
+      sendRequest('render', 'SetVolume', '<InstanceID>0</InstanceID><Channel>Master</Channel><DesiredVolume>'+req.params.vol+'</DesiredVolume>');
       res.end();
     });
 
@@ -182,56 +182,14 @@
     //-------------
     // Numbers
     //-------------
-    vieraControl.get('/tv/num/1', function(req, res) {
-      sendRequest('command', 'X_SendKey', '<X_KeyEvent>NRC_D1-ONOFF</X_KeyEvent>');
-      res.end();
+    vieraControl.get('/tv/num/:num', function(req, res) {
+      if(req.params.num > 10 || req.params.num < 0) {
+        res.send("Error, number out of range");
+      } else {
+        sendRequest('command', 'X_SendKey', '<X_KeyEvent>NRC_D'+req.params.num+'-ONOFF</X_KeyEvent>');
+        res.end();
+      }
     });
-
-    vieraControl.get('/tv/num/2', function(req, res) {
-      sendRequest('command', 'X_SendKey', '<X_KeyEvent>NRC_D2-ONOFF</X_KeyEvent>');
-      res.end();
-    });
-
-    vieraControl.get('/tv/num/3', function(req, res) {
-      sendRequest('command', 'X_SendKey', '<X_KeyEvent>NRC_D3-ONOFF</X_KeyEvent>');
-      res.end();
-    });
-
-    vieraControl.get('/tv/num/4', function(req, res) {
-      sendRequest('command', 'X_SendKey', '<X_KeyEvent>NRC_D4-ONOFF</X_KeyEvent>');
-      res.end();
-    });
-
-    vieraControl.get('/tv/num/5', function(req, res) {
-      sendRequest('command', 'X_SendKey', '<X_KeyEvent>NRC_D5-ONOFF</X_KeyEvent>');
-      res.end();
-    });
-
-    vieraControl.get('/tv/num/6', function(req, res) {
-      sendRequest('command', 'X_SendKey', '<X_KeyEvent>NRC_D6-ONOFF</X_KeyEvent>');
-      res.end();
-    });
-
-    vieraControl.get('/tv/num/7', function(req, res) {
-      sendRequest('command', 'X_SendKey', '<X_KeyEvent>NRC_D7-ONOFF</X_KeyEvent>');
-      res.end();
-    });
-
-    vieraControl.get('/tv/num/8', function(req, res) {
-      sendRequest('command', 'X_SendKey', '<X_KeyEvent>NRC_D8-ONOFF</X_KeyEvent>');
-      res.end();
-    });
-
-    vieraControl.get('/tv/num/9', function(req, res) {
-      sendRequest('command', 'X_SendKey', '<X_KeyEvent>NRC_D9-ONOFF</X_KeyEvent>');
-      res.end();
-    });
-
-    vieraControl.get('/tv/num/0', function(req, res) {
-      sendRequest('command', 'X_SendKey', '<X_KeyEvent>NRC_D0-ONOFF</X_KeyEvent>');
-      res.end();
-    });
-
 
     //-------------
     // Color buttons
