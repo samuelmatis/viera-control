@@ -17,7 +17,6 @@ setInterval ->
 
 # bind key actions
 action = (data) ->
-  console.log data
   $.post "/tv/action",
     action: data
 
