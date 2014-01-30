@@ -7,8 +7,7 @@
 2. Install dependencies - `(sudo) npm install`
 3. Compile coffescript to javascript - `coffee -cb app/scripts/app.coffee`
 4. Start the application - `node server/server.js`
-5. Set IP of your television (you can see it in TV settings) - `localhost:3000/tv/setip/<your-ip>`
-6. The application is now running on url [localhost:3000](http://localhost:3000)
+5. The application is now running on url [localhost:3000](http://localhost:3000)
 
 _ _ _ 
 ### UI : ###
