@@ -34,19 +34,3 @@ start = ->
     $.get "tv/volume", (data) ->
       $(".vol").text "Volume - " + data
   ), 1000
-
-  Mousetrap.bind ["up", "down", "left", "right"], (e, combo) ->
-    action "NRC_" + combo.toUpperCase() + "-ONOFF"
-
-  Mousetrap.bind ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"], (e, combo) ->
-    action "NRC_D" + combo + "-ONOFF"
-
-  Mousetrap.bind
-    "+": action("NRC_VOLUP-ONOFF")
-    "-": action("NRC_VOLDOWN-ONOFF")
-    m: action("NRC_MENU-ONOFF")
-    escape: action("NRC_RETURN-ONOFF")
-    "t+v": action("NRC_TV-ONOFF")
-    "a+v": action("NRC_CHG_INPUT-ONOFF")
-    "3+d": action("NRC_3D-ONOFF")
-
