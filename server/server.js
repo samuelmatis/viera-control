@@ -16,7 +16,7 @@ vieraControl.configure(function() {
   vieraControl.use( express.errorHandler({ dumpExceptions: true, showStack: true}) );
 });
 
-var ipAddress = "10.127.1.102";
+var ipAddress;
 
 // Method for sending requests
 var sendRequest = function(type, action, command, options) {
@@ -73,7 +73,15 @@ var sendRequest = function(type, action, command, options) {
   req.end();
 }
 
-vieraControl.get('/tv/setip/:ip', function(req,res) {
+vieraControl.get('/tv/ip', function(req, res) {
+    if(ipAddress) {
+        res.send({"ip": ipAddress});
+    } else {
+        res.send({"error": "IP address is not defined."});
+    }
+});
+
+vieraControl.get('/tv/ip/:ip', function(req,res) {
   if(/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/.test(req.params.ip)) {
     ipAddress = req.params.ip;
     res.send("ok")
