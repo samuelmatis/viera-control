@@ -71,7 +71,7 @@ var sendRequest = function(type, action, command, options) {
 
   req.write(body);
   req.end();
-}
+};
 
 vieraControl.get('/tv/ip', function(req, res) {
     if(ipAddress) {
