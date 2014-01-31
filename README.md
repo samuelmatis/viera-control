@@ -5,9 +5,8 @@
 
 1. You must have installed node.js on your computer.
 2. Install dependencies - `(sudo) npm install`
-3. Compile coffescript to javascript - `coffee -cb app/scripts/app.coffee`
-4. Start the application - `node server/server.js`
-5. The application is now running on url [localhost:3000](http://localhost:3000)
+3. Start the application - `node server/server.js`
+4. The application is now running on url [localhost:3000](http://localhost:3000)
 
 _ _ _ 
 ### UI : ###
@@ -19,13 +18,13 @@ Simple mobile optimized UI
 _ _ _ 
 ### API: ####
 
-All API calls except `/tv/action` are GET
+All API calls except `/tv/<ip_address>/action` are GET
 
 #### Using: ####
 
 * via cURL - *`curl <url>`*
 
-    example: `curl localhost:3000/tv/volume/mute`
+    example: `curl localhost:3000/tv/<ip_address>/volume/mute`
 
 
 * via web browser - enter url `localhost:3000/<url>`
@@ -34,87 +33,87 @@ All API calls except `/tv/action` are GET
 
 | URL          |METHOD |BODY DATA         |
 |--------------|-------|------------------|
-| `/tv/action` |POST   |**action** - code |
+| `/tv/<ip_address>/action` |POST   |**action** - code |
 
 #### Basic commands: ####
 
 | URL             |                  |
 |-----------------|------------------|
-| `/tv/power`     | Turn off tv      |
-| `/tv/menu`      | Show menu        |
-| `/tv/3d`        | Show 3D settings |
-| `/tv/ok`        | OK button        |
-| `/tv/back`      | Go back          |
-| `/tv/option`    | Option button    |
-| `/tv/cancel`    | Cancel button    |
-| `/tv/apps`      | Show apps        |
-| `/tv/home`      | Show homepage    |
-| `/tv/guide`     | Show guide       |
+| `/tv/<ip_address>/power`     | Turn off tv      |
+| `/tv/<ip_address>/menu`      | Show menu        |
+| `/tv/<ip_address>/3d`        | Show 3D settings |
+| `/tv/<ip_address>/ok`        | OK button        |
+| `/tv/<ip_address>/back`      | Go back          |
+| `/tv/<ip_address>/option`    | Option button    |
+| `/tv/<ip_address>/cancel`    | Cancel button    |
+| `/tv/<ip_address>/apps`      | Show apps        |
+| `/tv/<ip_address>/home`      | Show homepage    |
+| `/tv/<ip_address>/guide`     | Show guide       |
 
 
 #### Input: ####
 
 | URL            |                 |
 |----------------|-----------------|
-| `/tv/input/tv` | Change TV input |
-| `/tv/input/av` | Change AV input |
+| `/tv/<ip_address>/input/tv` | Change TV input |
+| `/tv/<ip_address>/input/av` | Change AV input |
 
 
 #### Controls: ####
 
 | URL         |          |
 |-------------|----------|
-| `/tv/up`    | Go up    |
-| `/tv/down`  | Go down  |
-| `/tv/left`  | Go left  |
-| `/tv/right` | Go right |
+| `/tv/<ip_address>/up`    | Go up    |
+| `/tv/<ip_address>/down`  | Go down  |
+| `/tv/<ip_address>/left`  | Go left  |
+| `/tv/<ip_address>/right` | Go right |
 
 
 #### Volume: ####
 
 | URL                         |            |
 |-----------------------------|------------|
-| `/tv/volume`                | Get volume |
-| `/tv/volume/<volume>`       | Set volume |
-| `/tv/volume/plus`           | Volume +1  |
-| `/tv/volume/minus`          | Volume -1  |
-| `/tv/volume/mute`           | Mute       |
+| `/tv/<ip_address>/volume`                | Get volume |
+| `/tv/<ip_address>/volume/<volume>`       | Set volume |
+| `/tv/<ip_address>/volume/plus`           | Volume +1  |
+| `/tv/<ip_address>/volume/minus`          | Volume -1  |
+| `/tv/<ip_address>/volume/mute`           | Mute       |
 
 
 #### Channels: ####
 
 | URL                |              |
 |--------------------|--------------|
-| `/tv/channel/up`   | Channel up   |
-| `/tv/channel/down` | Channel down |
+| `/tv/<ip_address>/channel/up`   | Channel up   |
+| `/tv/<ip_address>/channel/down` | Channel down |
 
 
 #### Player ####
 
 | URL                |               |
 |--------------------|---------------|
-| `/tv/player/rew`   | Rewind        |
-| `/tv/player/play`  | Play          |
-| `/tv/player/ff`    | Fast forward  |
-| `/tv/player/prev`  | Skip previous |
-| `/tv/player/pause` | Pause         |
-| `/tv/player/next`  | Next          |
-| `/tv/player/stop`  | Stop          |
-| `/tv/player/rec`   | Record        |
+| `/tv/<ip_address>/player/rew`   | Rewind        |
+| `/tv/<ip_address>/player/play`  | Play          |
+| `/tv/<ip_address>/player/ff`    | Fast forward  |
+| `/tv/<ip_address>/player/prev`  | Skip previous |
+| `/tv/<ip_address>/player/pause` | Pause         |
+| `/tv/<ip_address>/player/next`  | Next          |
+| `/tv/<ip_address>/player/stop`  | Stop          |
+| `/tv/<ip_address>/player/rec`   | Record        |
 
 
 #### Numbers ####
 
 | URL             |                    |
 |-----------------|--------------------|
-| `/tv/vol/<num>` | Number from 1 to 9 |
+| `/tv/<ip_address>/vol/<num>` | Number from 1 to 9 |
 
 
 #### Color buttons ####
 
 | URL          |               |
 |--------------|---------------|
-| `/tv/red`    | Red button    |
-| `/tv/green`  | Green button  |
-| `/tv/yellow` | Yellow button |
-| `/tv/blue`   | Blue button   |
+| `/tv/<ip_address>/red`    | Red button    |
+| `/tv/<ip_address>/green`  | Green button  |
+| `/tv/<ip_address>/yellow` | Yellow button |
+| `/tv/<ip_address>/blue`   | Blue button   |

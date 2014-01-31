@@ -16,10 +16,8 @@ vieraControl.configure(function() {
   vieraControl.use( express.errorHandler({ dumpExceptions: true, showStack: true}) );
 });
 
-var ipAddress;
-
 // Method for sending requests
-var sendRequest = function(type, action, command, options) {
+var sendRequest = function(ip, type, action, command, options) {
   var url, urn;
   if(type == "command") {
     url = "/nrc/control_0";
@@ -41,7 +39,7 @@ var sendRequest = function(type, action, command, options) {
    console.log(command + "\n");
 
    var postRequest = {
-    host: ipAddress,
+    host: ip,
     path: url,
     port: 55000,
     method: "POST",
@@ -73,13 +71,13 @@ var sendRequest = function(type, action, command, options) {
   req.end();
 };
 
-vieraControl.get('/tv/ip', function(req, res) {
-    if(ipAddress) {
-        res.send({"ip": ipAddress});
-    } else {
-        res.send({"error": "IP address is not defined."});
-    }
-});
+//vieraControl.get('/tv/:ip/ip', function(req, res) {
+//    if(ipAddress) {
+//        res.send({"ip": ipAddress});
+//    } else {
+//        res.send({"error": "IP address is not defined."});
+//    }
+//});
 
 vieraControl.get('/tv/ip/:ip', function(req,res) {
   if(/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/.test(req.params.ip)) {
@@ -90,14 +88,14 @@ vieraControl.get('/tv/ip/:ip', function(req,res) {
   }
 });
 
-vieraControl.post('/tv/action', function(req, res) {
-  sendRequest('command', 'X_SendKey', '<X_KeyEvent>'+req.body.action+'</X_KeyEvent>');
+vieraControl.post('/tv/:ip/action', function(req, res) {
+  sendRequest(req.params.ip, 'command', 'X_SendKey', '<X_KeyEvent>'+req.body.action+'</X_KeyEvent>');
   res.end();
 });
 
-vieraControl.get('/tv/volume', function(req, res) {
+vieraControl.get('/tv/:ip/volume', function(req, res) {
   var self = this;
-  sendRequest('render', 'GetVolume', '<InstanceID>0</InstanceID><Channel>Master</Channel>',
+  sendRequest(req.params.ip, 'render', 'GetVolume', '<InstanceID>0</InstanceID><Channel>Master</Channel>',
     {
       callback: function(data){
         var match = /<CurrentVolume>(\d*)<\/CurrentVolume>/gm.exec(data);
