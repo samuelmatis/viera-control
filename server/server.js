@@ -17,7 +17,7 @@ vieraControl.configure(function() {
 });
 
 // Method for sending requests
-var sendRequest = function(ip, type, action, command, options) {
+var sendRequest = function(ipAddress, type, action, command, options) {
   var url, urn;
   if(type == "command") {
     url = "/nrc/control_0";
@@ -39,7 +39,7 @@ var sendRequest = function(ip, type, action, command, options) {
    console.log(command + "\n");
 
    var postRequest = {
-    host: ip,
+    host: ipAddress,
     path: url,
     port: 55000,
     method: "POST",
