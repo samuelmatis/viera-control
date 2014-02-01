@@ -5,9 +5,13 @@ if(localStorage.getItem('ipAddress') === null) {
     $(".js-ip-save").on("click", function(e) {
         e.preventDefault();
         var ipAddress = $('#ipField').val()
-        localStorage.setItem('ipAddress', ipAddress);
-        $("#ipModal").modal("hide");
-        start();
+        if(/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/.test(ipAddress)) {
+            localStorage.setItem('ipAddress', ipAddress);
+            $("#ipModal").modal("hide");
+            start();
+        } else {
+            alert("Invalid IP");
+        }
     });
 } else {
     start();
