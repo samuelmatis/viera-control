@@ -1,5 +1,14 @@
 FastClick.attach(document.body);
 
+$(document).ready(function() {
+    $(window).keydown(function(event){
+        if(event.keyCode == 13) {
+            event.preventDefault();
+            return false;
+        }
+    });
+});
+
 if(localStorage.getItem('ipAddress') === null) {
     $("#ipModal").modal();
     $(".js-ip-save").on("click", function(e) {
