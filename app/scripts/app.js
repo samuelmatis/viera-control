@@ -14,7 +14,8 @@ if(localStorage.getItem('ipAddress') === null) {
     $(".js-ip-save").on("click", function(e) {
         e.preventDefault();
         var ipAddress = $('#ipField').val()
-        if(/^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/.test(ipAddress)) {
+        var ipRegExp = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/;
+        if(ipRegExp.test(ipAddress)) {
             localStorage.setItem('ipAddress', ipAddress);
             $("#ipModal").modal("hide");
             start();
