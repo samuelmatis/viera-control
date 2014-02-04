@@ -8,6 +8,7 @@
 .grid4 { width: 72px; }
 .grid1 { width: 40px; float: left; }
 .grid2 { width: 144px; float: left; }
+.js-ip-config { margin-top: 10px; }
 #arrows { width:135px; float: left; margin-right: 15px; margin-left: 15px; }
 .nums { width: 150px; margin-top: 10px; margin-left: 75px; }
 .num { width: 47px; height: 40px; }

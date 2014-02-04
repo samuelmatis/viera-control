@@ -9,8 +9,19 @@ $(document).ready(function() {
     });
 });
 
+$('.js-ip-config').bind('click', function(e) {
+	e.preventDefault();
+	showIpConfig();
+});
+
 if(localStorage.getItem('ipAddress') === null) {
-    $("#ipModal").modal();
+    showIpConfig();
+} else {
+    start();
+}
+
+function showIpConfig() {
+	$("#ipModal").modal();
     $(".js-ip-save").on("click", function(e) {
         e.preventDefault();
         var ipAddress = $('#ipField').val()
@@ -23,8 +34,6 @@ if(localStorage.getItem('ipAddress') === null) {
             alert("Invalid IP");
         }
     });
-} else {
-    start();
 }
 
 function start() {
