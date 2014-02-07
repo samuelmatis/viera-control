@@ -63,8 +63,8 @@ var sendRequest = function(ipAddress, type, action, command, options) {
   });
 
   req.on('error', function(e) {
-    console.log('error: ' + e.message);
-    console.log(e);
+     console.log('ERROR: ' + e);
+     return false;
   });
 
   req.write(body);
@@ -72,8 +72,11 @@ var sendRequest = function(ipAddress, type, action, command, options) {
 };
 
 vieraControl.post('/tv/:ip/action', function(req, res) {
-  sendRequest(req.params.ip, 'command', 'X_SendKey', '<X_KeyEvent>'+req.body.action+'</X_KeyEvent>');
-  res.end();
+  if(sendRequest(req.params.ip, 'command', 'X_SendKey', '<X_KeyEvent>'+req.body.action+'</X_KeyEvent>')) {
+      res.end();
+  } else {
+      res.send({"error": "internal error"});
+  }
 });
 
 vieraControl.get('/tv/:ip/volume', function(req, res) {
