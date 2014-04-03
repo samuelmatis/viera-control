@@ -1,6 +1,8 @@
 # Viera control #
 > Control your Panasonic Viera TV with simple REST API and mobile optimized UI
 
+### [Newer faster and lighter version - Viera Control v2](https://github.com/samuelmatis/viera-control-v2) ###
+
 ### Start application ###
 
 1. You must have installed node.js on your computer.
