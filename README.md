@@ -15,7 +15,7 @@ _ _ _
 
 Simple mobile optimized UI
 
-![ui](http://app_screens.matiss.sk/viera.png)
+![ui](http://media.matiss.sk/viera-control-screen.png)
 
 _ _ _ 
 ### API: ####
